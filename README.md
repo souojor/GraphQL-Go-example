@@ -14,3 +14,5 @@ go run github.com/99designs/gqlgen init
 go mod tidy
 
 go run server.go
+
+go run github.com/99designs/gqlgen generate
