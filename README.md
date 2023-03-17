@@ -16,3 +16,21 @@ go mod tidy
 go run server.go
 
 go run github.com/99designs/gqlgen generate
+
+Call to createCategories:
+
+mutation createCategory {
+  createCategory(input: {name: "Tecnologia", description: "Cursos de Tecnologia"}) {
+    id 
+    name
+    description
+  }
+}
+
+query queryCategories {
+  categories {
+    id
+    name
+    description
+  }
+}
