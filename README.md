@@ -27,10 +27,58 @@ mutation createCategory {
   }
 }
 
+mutation createCourse {
+  createCourse(input: {name: "Full Cycle", description: "Curso Full Cycle", categoryId: "b8af5572-ccf6-495d-8506-27f7643f5557"}) {
+    id 
+    name
+  }
+}
+
 query queryCategories {
   categories {
     id
     name
     description
+  }
+}
+
+query queryCourses {
+  courses {
+    id
+    name
+  }
+}
+
+Para o encadeamento das entidades, separamos no models_gen.go as structs course e category em arquivos separados e editamos o gqlgen.yml adicionando os mesmos em "models".
+
+de category.go retiramos o relacionamento "Courses     []*Course `json:"courses"`"
+
+go run github.com/99designs/gqlgen generate
+
+query queryCategoriesWithCourses {
+  categories {
+    id
+    name
+    courses{
+      id
+      name
+    }
+  }
+}
+
+de courses.go retiramos o relacionamento "Category    *Category `json:"category"`"
+
+go run github.com/99designs/gqlgen generate
+
+query queryCoursesWithCategories {
+  courses {
+    id
+    name
+    description
+    category {
+      id
+      name
+      description
+    }
   }
 }
